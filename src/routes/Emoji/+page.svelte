@@ -2,8 +2,8 @@
 </script>
 
 <div class="bg-gray-100 p-4 rounded-lg shadow-md">
-	<h1>Infobox</h1>
-	<p>Welcome to Beerldle!</p>
+	<h1>Emoji</h1>
+	<p>Guess the beer type based on the emojis :{')'}</p>
 	<p>This is a collection of small games where you have to guess beers!</p>
 	<p>Start with the classic game where you will have to guess a beer</p>
 	<p>Each try will give you some hints based on some categories</p>
