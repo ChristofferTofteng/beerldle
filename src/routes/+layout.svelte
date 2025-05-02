@@ -1,18 +1,22 @@
 <script lang="ts">
 	import '../app.css';
+	import backgroundImage from '$lib/assets/background2.webp';
 
 	let { children } = $props();
 </script>
 
-{@render children()}
+<div
+	class="h-screen bg-cover bg-center flex items-center justify-center"
+	style="background-image: url({backgroundImage})"
+>
+	{@render children()}
+</div>
 
 <style>
 	:global(body) {
-		background-color: #1e1e2f;
-		color: #ffffff;
 		font-family: 'Courier New', Courier, monospace;
+		color: white;
 		font-size: 16px;
-		padding: 64px;
 	}
 	:global(button:active) {
 		transform: scale(0.98); /* Slightly shrink the button when pressed */

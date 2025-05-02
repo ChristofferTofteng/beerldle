@@ -1,7 +1,7 @@
 <script lang="ts">
 </script>
 
-<div class="bg-gray-100 p-4 rounded-lg shadow-md">
+<div class="bg-gray-700 p-4 rounded-lg shadow-md">
 	<h1>Infobox</h1>
 	<p>Welcome to Beerldle!</p>
 	<p>This is a collection of small games where you have to guess beers!</p>
