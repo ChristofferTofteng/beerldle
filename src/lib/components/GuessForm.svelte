@@ -17,7 +17,7 @@
 
 <form
 	onsubmit={formSubmitted}
-	class="bg-gray-100 p-4 flex w-2/5 gap-8 rounded-lg shadow-md items-center justify-self-center"
+	class="bg-gray-700 p-4 flex w-2/5 gap-8 rounded-lg shadow-md items-center justify-self-center"
 >
 	<input
 		type="text"
