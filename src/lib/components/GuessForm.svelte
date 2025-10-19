@@ -24,7 +24,7 @@
 		bind:value={newGuess}
 		name="newGuess"
 		placeholder="Guess..."
-		class="border rounded p-2 w-full"
+		class="border rounded text-black p-2 w-full"
 	/>
-	<button class="bg-blue-500 text-white p-2 rounded">Guess</button>
+	<button class="hover:cursor-pointer bg-blue-500 text-white p-2 rounded">Guess</button>
 </form>

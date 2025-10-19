@@ -8,6 +8,4 @@
 	}
 </script>
 
-<div class="rounded-md bg-gray-700 p-2 shadow-md m-2">
-	<button {onclick} class="text-blue-500 hover:underline">{name}</button>
-</div>
+<button {onclick} class="hover:cursor-pointer rounded-md bg-amber-500 p-2 shadow-md">{name}</button>
