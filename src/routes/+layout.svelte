@@ -1,21 +1,25 @@
 <script lang="ts">
 	import '../app.css';
+	import backgroundImage from '$lib/assets/background2.webp';
 
 	let { children } = $props();
 </script>
 
-{@render children()}
+<div
+	class="h-screen bg-cover bg-center flex flex-col items-center justify-center"
+	style="background-image: url({backgroundImage})"
+>
+	{@render children()}
+</div>
 
 <style>
 	:global(body) {
-		background-color: #1e1e2f;
-		color: #ffffff;
 		font-family: 'Courier New', Courier, monospace;
+		color: white;
 		font-size: 16px;
-		padding: 64px;
 	}
 	:global(button:active) {
-		transform: scale(0.98); /* Slightly shrink the button when pressed */
+		transform: scale(0.95); /* Slightly shrink the button when pressed */
 		box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Add an inset shadow */
 	}
 </style>
