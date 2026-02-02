@@ -4,9 +4,14 @@
 	import Guesses from '../../lib/components/Guesses.svelte';
 
 	let guesses = $state<Guess[]>([]);
+	const targetBeer = 'Heineken';
 
-	function makeGuess(beer: string, correct: boolean) {
-		guesses.push({ guess: beer, correct: false });
+	function makeGuess(beer: string) {
+		const isCorrect = beer.toLowerCase() === targetBeer.toLowerCase();
+		guesses.push({ guess: beer, correct: isCorrect });
+		if (isCorrect) {
+			alert('Congratulations! You guessed the correct beer: ' + targetBeer);
+		}
 	}
 
 	const onclick = () => {
@@ -14,7 +19,7 @@
 	};
 </script>
 
-<div class="p-4 rounded-lg shadow-md">
+<div class="p-4">
 	<button {onclick}>Go back</button>
 	<h1>Classic</h1>
 	<p>Guess the beer!</p>
