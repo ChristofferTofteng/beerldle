@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	import backgroundImage from '$lib/assets/background2.webp';
+	import backgroundImage from '$lib/assets/beerline.webp';
 
 	let { children } = $props();
 </script>
