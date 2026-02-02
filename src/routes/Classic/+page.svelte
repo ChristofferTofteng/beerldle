@@ -5,6 +5,7 @@
 
 	let guesses = $state<Guess[]>([]);
 	const targetBeer = 'Heineken';
+	let { data } = $props();
 
 	function makeGuess(beer: string) {
 		const isCorrect = beer.toLowerCase() === targetBeer.toLowerCase();
@@ -25,6 +26,10 @@
 	<p>Guess the beer!</p>
 	<p>Start by guessing your favorite beer and go from there :{')'}</p>
 </div>
+
+{#each data.beers as beer}
+	<li>{beer.name}</li>
+{/each}
 
 <GuessForm {makeGuess} />
 <Guesses {guesses} />
