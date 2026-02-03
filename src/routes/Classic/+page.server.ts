@@ -8,7 +8,6 @@ export const load: PageServerLoad = async () => {
 		console.error('Error loading beers:', error.message);
 		return { beers: [] };
 	}
-	console.log('Data collected', data);
 
 	return {
 		beers: data ?? []
