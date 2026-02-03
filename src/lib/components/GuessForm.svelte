@@ -1,23 +1,36 @@
 <script lang="ts">
+	import type { Beer } from '../../types';
+
 	let newGuess = $state('');
 
 	let {
-		makeGuess
+		makeGuess,
+		beers
 	}: {
 		makeGuess: (newGuess: string) => void;
+		beers: Beer[];
 	} = $props();
+
+	function removeBeer(beerId: number) {
+		beers = beers.filter((beer) => beer.id !== beerId);
+	}
 
 	function formSubmitted(event: Event) {
 		event.preventDefault();
-		console.log('Form submitted:', newGuess);
 		makeGuess(newGuess);
+		const foundBeer = beers.find(
+			(beer) => beer.name.toLowerCase() === newGuess.trim().toLowerCase()
+		);
+		if (foundBeer) {
+			removeBeer(foundBeer.id);
+		}
 		newGuess = '';
 	}
 </script>
 
 <form
 	onsubmit={formSubmitted}
-	class="bg-gray-700 p-4 flex w-2/5 gap-8 rounded-lg shadow-md items-center justify-self-center"
+	class="bg-amber-500 p-4 flex w-2/5 gap-8 rounded-lg shadow-md items-center justify-self-center"
 >
 	<input
 		type="text"
@@ -25,6 +38,13 @@
 		name="newGuess"
 		placeholder="Guess..."
 		class="border rounded text-black p-2 w-full"
+		list="beers"
+		autocomplete="off"
 	/>
-	<button class="hover:cursor-pointer bg-blue-500 text-white p-2 rounded">Guess</button>
+	<datalist id="beers">
+		{#each beers as beer}
+			<option value={beer.name}>{beer.name}</option>
+		{/each}
+	</datalist>
+	<button class="hover:cursor-pointer bg-amber-800 text-white p-2 rounded">Guess</button>
 </form>
