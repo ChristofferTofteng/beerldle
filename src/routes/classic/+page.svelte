@@ -4,8 +4,10 @@
 	import Guesses from '../../lib/components/Guesses.svelte';
 
 	let guesses = $state<Guess[]>([]);
-	const targetBeer = 'Heineken';
-	let { data } = $props();
+	let props = $props();
+	let beers = props.data.beers;
+	const randomIndex = Math.floor(Math.random() * beers.length);
+	const targetBeer = beers[randomIndex].name;
 
 	function makeGuess(beer: string) {
 		const isCorrect = beer.toLowerCase() === targetBeer.toLowerCase();
@@ -25,11 +27,11 @@
 	<h1>Classic</h1>
 	<p>Guess the beer!</p>
 	<p>Start by guessing your favorite beer and go from there :{')'}</p>
-</div>
 
-{#each data.beers as beer}
-	<li>{beer.name}</li>
-{/each}
+	{#each beers as beer}
+		<li>{beer.name}</li>
+	{/each}
+</div>
 
 <GuessForm {makeGuess} />
 <Guesses {guesses} />
