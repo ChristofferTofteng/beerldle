@@ -57,7 +57,7 @@
 		background-color: #17b06b !important;
 	}
 	article.partial {
-		background-color: #f1c40f !important;
+		background-color: #f19a0f !important;
 	}
 	.guesses {
 		height: auto;
