@@ -38,6 +38,7 @@
 		"vite": "^6.2.5"
 	},
 	"dependencies": {
-		"@supabase/supabase-js": "^2.93.3"
+		"@supabase/supabase-js": "^2.93.3",
+		"svelte-confetti": "^2.3.2"
 	}
 }
