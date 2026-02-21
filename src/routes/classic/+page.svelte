@@ -2,11 +2,13 @@
 	import GuessForm from '../../lib/components/GuessForm.svelte';
 	import type { Beer, Brewery, Guess } from '../../types';
 	import Guesses from '../../lib/components/Guesses.svelte';
+	import { Confetti } from 'svelte-confetti';
 
 	let guesses = $state<Guess[]>([]);
 	const { data } = $props();
 	let beers = $derived(data.beers)!;
 	let breweries = $derived(data.breweries)!;
+	let beerGuessed = $state(false);
 
 	const targetBeer = $derived(beers[Math.floor(Math.random() * beers.length)]);
 	const breweryMap = $derived(new Map(breweries.map((b) => [b.name, b])));
@@ -47,10 +49,10 @@
 		if (!beer) return;
 
 		const correct = evaluateGuess(beer);
-		guesses.push({ guess: beer, correct });
 
+		guesses.unshift({ guess: beer, correct });
 		if (correct.name === 'correct') {
-			alert(`Congratulations! You guessed ${targetBeer.name}`);
+			beerGuessed = true;
 		}
 	}
 
@@ -63,6 +65,17 @@
 	}
 </script>
 
+{#if beerGuessed}
+	<Confetti
+		x={[-5, 5]}
+		y={[0, 0.1]}
+		delay={[500, 2000]}
+		infinite
+		duration="5000"
+		amount="200"
+		fallDistance="95vh"
+	/>
+{/if}
 <div class="p-4">
 	<button {onclick}>Go back</button>
 	<h1>Classic</h1>
@@ -70,7 +83,11 @@
 	<p>Start by guessing your favorite beer and go from there :{')'}</p>
 </div>
 
+{#if beerGuessed}
+	<div class="text-center text-2xl font-bold mb-4">Congratulations! You guessed the beer!</div>
+{/if}
+
 <GuessForm {makeGuess} {beers} />
 <Guesses {guesses} />
 
-<button class="bg-amber-500 rounded-md p-3" onclick={resetGame}>Reset Game</button>
+<button class="bg-amber-500 rounded-md p-3 mt-4" onclick={resetGame}>Reset Game</button>

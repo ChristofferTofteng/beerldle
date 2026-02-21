@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
+	import { tick } from 'svelte';
 	import type { Guess, Beer } from '../../types';
 
 	let {
@@ -13,12 +14,17 @@
 		const v = beer[key];
 		return v == null ? '' : String(v);
 	}
+
+	function staggeredFade(node: Element, options: { duration: number; delay: number }) {
+		tick();
+		return fade(node, options);
+	}
 </script>
 
 <!-- header row -->
-<div class="grid gap-4 mt-4">
+<div class="grid gap-2 mt-4">
 	<div
-		class="headers"
+		class="text-center font-semibold"
 		style="display: grid; grid-template-columns: repeat({categories.length}, minmax(0, 1fr)); gap: 0.5rem;"
 	>
 		{#each categories as category}
@@ -28,14 +34,17 @@
 	<!-- guesses -->
 	<div class="guesses">
 		{#each guesses as guess}
-			<div class="flex gap-1.5">
-				{#each categories as category}
-					<article
+			<div
+				class="text-center"
+				style="display: grid; grid-template-columns: repeat({categories.length}, minmax(0, 1fr)); gap: 0.5rem;"
+			>
+				{#each categories as category, index}
+					<p
 						class={guess.correct[category as keyof typeof guess.correct]}
-						in:fade={{ duration: 400 }}
+						in:staggeredFade={{ duration: 400, delay: index * 100 }}
 					>
 						{valueFor(guess.guess, category)}
-					</article>
+					</p>
 				{/each}
 			</div>
 		{/each}
@@ -43,21 +52,21 @@
 </div>
 
 <style>
-	article {
+	p {
 		padding: 1rem;
-		margin: 1rem 0;
+		margin: 0.5rem 0.25rem;
 		border-radius: 8px;
 		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	}
 
-	article.incorrect {
-		background-color: #e74c3c !important;
+	p.incorrect {
+		background-color: #e74c3c;
 	}
-	article.correct {
-		background-color: #17b06b !important;
+	p.correct {
+		background-color: #17b06b;
 	}
-	article.partial {
-		background-color: #f1c40f !important;
+	p.partial {
+		background-color: #f19a0f;
 	}
 	.guesses {
 		height: auto;
