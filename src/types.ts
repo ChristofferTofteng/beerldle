@@ -5,7 +5,7 @@ export type Guess = {
 		brewery: 'correct' | 'incorrect' | 'partial';
 		type: 'correct' | 'incorrect' | 'partial';
 		abv: 'correct' | 'incorrect' | 'partial';
-	}
+	};
 };
 
 export type Beer = {
@@ -22,4 +22,10 @@ export type Beer = {
 	extra_spice: number;
 	total_score: number;
 	assembly_nr: number;
+};
+
+export type Brewery = {
+	id: number;
+	name: string;
+	country: string;
 };

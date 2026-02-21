@@ -1,34 +1,56 @@
 <script lang="ts">
 	import GuessForm from '../../lib/components/GuessForm.svelte';
-	import type { Beer, Guess } from '../../types';
+	import type { Beer, Brewery, Guess } from '../../types';
 	import Guesses from '../../lib/components/Guesses.svelte';
 
 	let guesses = $state<Guess[]>([]);
-	let props = $props();
-	let beers = props.data.beers;
-	const randomIndex = Math.floor(Math.random() * beers.length);
-	const targetBeer = beers[randomIndex];
+	const { data } = $props();
+	let beers = $derived(data.beers)!;
+	let breweries = $derived(data.breweries)!;
 
-	function makeGuess(name: string) {
-		const trimmedName = name.trim();
-		if (trimmedName === '') {
-			return;
-		}
-		const beer = beers.find((beer: Beer) => beer.name.toLowerCase() === trimmedName.toLowerCase());
-		const correct = {
-			name: beer.name.toLowerCase() === targetBeer.name.toLowerCase() ? 'correct' : 'incorrect',
-			brewery: beer.brewery === targetBeer.brewery ? 'correct' : 'incorrect',
+	const targetBeer = $derived(beers[Math.floor(Math.random() * beers.length)]);
+	const breweryMap = $derived(new Map(breweries.map((b) => [b.name, b])));
+
+	const getCountry = (beer: Beer) => breweryMap.get(beer.brewery)?.country ?? 'Unknown';
+
+	const withinAbvRange = (beer: Beer, tolerance = 0.5) =>
+		Math.abs(beer.abv - targetBeer.abv) <= tolerance;
+
+	const isSameIPAGroup = (a: Beer, b: Beer) =>
+		a.type.toLowerCase().includes('ipa') && b.type.toLowerCase().includes('ipa');
+
+	function evaluateGuess(beer: Beer) {
+		return {
+			name: beer.name === targetBeer.name ? 'correct' : 'incorrect',
+
+			brewery:
+				beer.brewery === targetBeer.brewery
+					? 'correct'
+					: getCountry(beer) === getCountry(targetBeer)
+						? 'partial'
+						: 'incorrect',
+
 			type:
 				beer.type === targetBeer.type
 					? 'correct'
-					: beer.type.toLowerCase().includes('ipa') && targetBeer.type.toLowerCase().includes('ipa')
+					: isSameIPAGroup(beer, targetBeer)
 						? 'partial'
 						: 'incorrect',
-			abv: beer.abv === targetBeer.abv ? 'correct' : 'incorrect'
+
+			abv: beer.abv === targetBeer.abv ? 'correct' : withinAbvRange(beer) ? 'partial' : 'incorrect'
 		} as const;
+	}
+
+	function makeGuess(name: string) {
+		const beer = beers.find((b) => b.name.toLowerCase() === name.trim().toLowerCase());
+
+		if (!beer) return;
+
+		const correct = evaluateGuess(beer);
 		guesses.push({ guess: beer, correct });
+
 		if (correct.name === 'correct') {
-			alert('Congratulations! You guessed the correct beer: ' + targetBeer);
+			alert(`Congratulations! You guessed ${targetBeer.name}`);
 		}
 	}
 
