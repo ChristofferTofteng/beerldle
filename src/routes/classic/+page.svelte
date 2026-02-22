@@ -71,8 +71,8 @@
 		y={[0, 0.1]}
 		delay={[500, 2000]}
 		infinite
-		duration="5000"
-		amount="200"
+		duration={5000}
+		amount={200}
 		fallDistance="95vh"
 	/>
 {/if}
