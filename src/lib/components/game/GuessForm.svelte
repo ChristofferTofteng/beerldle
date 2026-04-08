@@ -42,9 +42,9 @@
 		autocomplete="off"
 	/>
 	<datalist id="beers">
-		{#each beers as beer}
+		{#each beers as beer (beer.id)}
 			<option value={beer.name}>{beer.name}</option>
 		{/each}
 	</datalist>
-	<button class="hover:cursor-pointer bg-amber-800 text-white p-2 rounded">Guess</button>
+	<button class="bg-amber-800 text-white p-2 rounded hover:bg-amber-700">Guess</button>
 </form>

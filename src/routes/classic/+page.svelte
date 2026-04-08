@@ -1,8 +1,8 @@
 <script lang="ts">
-	import GuessForm from '../../lib/components/GuessForm.svelte';
-	import type { Beer, Brewery, Guess } from '../../types';
-	import Guesses from '../../lib/components/Guesses.svelte';
+	import { GuessForm, Guesses } from '../../lib/components/game';
+	import type { Beer, Guess } from '../../types';
 	import { Confetti } from 'svelte-confetti';
+	import { goto } from '$app/navigation';
 
 	let guesses = $state<Guess[]>([]);
 	const { data } = $props();
@@ -10,8 +10,12 @@
 	let breweries = $derived(data.breweries)!;
 	let beerGuessed = $state(false);
 
-	const targetBeer = $derived(beers[Math.floor(Math.random() * beers.length)]);
+	let targetBeer = $derived(beers[Math.floor(Math.random() * beers.length)]);
 	const breweryMap = $derived(new Map(breweries.map((b) => [b.name, b])));
+
+	const getNewTargetBeer = (): Beer => {
+		return beers[Math.floor(Math.random() * beers.length)];
+	};
 
 	const getCountry = (beer: Beer) => breweryMap.get(beer.brewery)?.country ?? 'Unknown';
 
@@ -50,18 +54,21 @@
 
 		const correct = evaluateGuess(beer);
 
-		guesses.unshift({ guess: beer, correct });
+		guesses.unshift({ id: crypto.randomUUID(), guess: beer, correct });
 		if (correct.name === 'correct') {
 			beerGuessed = true;
 		}
 	}
 
 	const onclick = () => {
-		window.history.back();
+		goto('/');
 	};
 
 	function resetGame() {
-		window.location.reload();
+		guesses = [];
+		beerGuessed = false;
+		targetBeer = getNewTargetBeer();
+		//TODO: Find a way to reset the beers array such that stuff isnt removed when resetting.
 	}
 </script>
 
@@ -76,11 +83,18 @@
 		fallDistance="95vh"
 	/>
 {/if}
-<div class="p-4">
-	<button {onclick}>Go back</button>
-	<h1>Classic</h1>
-	<p>Guess the beer!</p>
-	<p>Start by guessing your favorite beer and go from there :{')'}</p>
+<div class="p-4 bg-amber-500 rounded-lg shadow-md w-full max-w-2xl mx-auto mb-6 text-center">
+	<div class="relative flex items-center justify-center mb-4">
+		<button
+			{onclick}
+			class="absolute left-0 bg-amber-800 text-white p-2 rounded hover:bg-amber-700"
+		>
+			Go back
+		</button>
+		<h1>Classic</h1>
+	</div>
+	<p class="text-xl font-semibold">Guess the beer!</p>
+	<p class="text-lg font-medium">Start by guessing your favorite beer and go from there :)</p>
 </div>
 
 {#if beerGuessed}
@@ -90,4 +104,6 @@
 <GuessForm {makeGuess} {beers} />
 <Guesses {guesses} />
 
-<button class="bg-amber-500 rounded-md p-3 mt-4" onclick={resetGame}>Reset Game</button>
+<button class="bg-amber-800 rounded-md p-3 mt-4 hover:bg-amber-700" onclick={resetGame}
+	>Reset Game</button
+>

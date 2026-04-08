@@ -1,11 +1,14 @@
 export type Guess = {
+	id: string;
 	guess: Beer;
-	correct: {
-		name: 'correct' | 'incorrect' | 'partial';
-		brewery: 'correct' | 'incorrect' | 'partial';
-		type: 'correct' | 'incorrect' | 'partial';
-		abv: 'correct' | 'incorrect' | 'partial';
-	};
+	correct: GuessResult;
+};
+
+type GuessResult = {
+	name: 'correct' | 'incorrect' | 'partial';
+	brewery: 'correct' | 'incorrect' | 'partial';
+	type: 'correct' | 'incorrect' | 'partial';
+	abv: 'correct' | 'incorrect' | 'partial';
 };
 
 export type Beer = {
