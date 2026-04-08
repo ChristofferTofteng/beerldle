@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import type { Guess, Beer } from '../../types';
+	import type { Guess, Beer } from '../../../types';
 
 	let {
 		guesses

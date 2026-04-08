@@ -3,6 +3,7 @@
 	import type { Beer, Guess } from '../../types';
 	import { Confetti } from 'svelte-confetti';
 	import { goto } from '$app/navigation';
+	import { areTypesInSameGroup } from '$lib/utils/beerTypes';
 
 	let guesses = $state<Guess[]>([]);
 	const { data } = $props();
@@ -22,9 +23,6 @@
 	const withinAbvRange = (beer: Beer, tolerance = 0.5) =>
 		Math.abs(beer.abv - targetBeer.abv) <= tolerance;
 
-	const isSameIPAGroup = (a: Beer, b: Beer) =>
-		a.type.toLowerCase().includes('ipa') && b.type.toLowerCase().includes('ipa');
-
 	function evaluateGuess(beer: Beer) {
 		return {
 			name: beer.name === targetBeer.name ? 'correct' : 'incorrect',
@@ -39,7 +37,7 @@
 			type:
 				beer.type === targetBeer.type
 					? 'correct'
-					: isSameIPAGroup(beer, targetBeer)
+					: areTypesInSameGroup(beer.type, targetBeer.type)
 						? 'partial'
 						: 'incorrect',
 
