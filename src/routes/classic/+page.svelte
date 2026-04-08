@@ -4,19 +4,18 @@
 	import { Confetti } from 'svelte-confetti';
 	import { goto } from '$app/navigation';
 	import { areTypesInSameGroup } from '$lib/utils/beerTypes';
+	import { resolve } from '$app/paths';
 
 	let guesses = $state<Guess[]>([]);
 	const { data } = $props();
-	let beers = $derived(data.beers)!;
-	let breweries = $derived(data.breweries)!;
+	let originalBeers = $derived(data.beers ?? []);
+	let beers = $derived([...originalBeers]);
+	let breweries = $derived(data.breweries ?? []);
 	let beerGuessed = $state(false);
 
 	let targetBeer = $derived(beers[Math.floor(Math.random() * beers.length)]);
-	const breweryMap = $derived(new Map(breweries.map((b) => [b.name, b])));
 
-	const getNewTargetBeer = (): Beer => {
-		return beers[Math.floor(Math.random() * beers.length)];
-	};
+	const breweryMap = $derived(new Map(breweries.map((b) => [b.name, b])));
 
 	const getCountry = (beer: Beer) => breweryMap.get(beer.brewery)?.country ?? 'Unknown';
 
@@ -59,14 +58,14 @@
 	}
 
 	const onclick = () => {
-		goto('/');
+		goto(resolve('/'));
 	};
 
 	function resetGame() {
 		guesses = [];
 		beerGuessed = false;
-		targetBeer = getNewTargetBeer();
-		//TODO: Find a way to reset the beers array such that stuff isnt removed when resetting.
+		beers = [...originalBeers];
+		// targetBeer will auto-update
 	}
 </script>
 

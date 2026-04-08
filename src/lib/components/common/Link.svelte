@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 
 	let { name, url } = $props();
 
 	function onclick() {
-		goto(url);
+		goto(resolve(url));
 	}
 </script>
 
