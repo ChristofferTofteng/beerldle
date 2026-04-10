@@ -5,6 +5,7 @@
 	import { goto } from '$app/navigation';
 	import { areTypesInSameGroup } from '$lib/utils/beerTypes';
 	import { resolve } from '$app/paths';
+	import Tooltip from '$lib/components/common/Tooltip.svelte';
 
 	let guesses = $state<Guess[]>([]);
 	const { data } = $props();
@@ -77,18 +78,21 @@
 		infinite
 		duration={5000}
 		amount={200}
-		fallDistance="95vh"
+		fallDistance="90vh"
 	/>
 {/if}
 <div class="p-4 bg-amber-500 rounded-lg shadow-md w-full max-w-2xl mx-auto mb-6 text-center">
-	<div class="relative flex items-center justify-center mb-4">
-		<button
-			{onclick}
-			class="absolute left-0 bg-amber-800 text-white p-2 rounded hover:bg-amber-700"
-		>
+	<div class=" flex items-center justify-between mb-4">
+		<button {onclick} class=" bg-amber-800 text-white p-2 rounded hover:bg-amber-700">
 			Go back
 		</button>
 		<h1>Classic</h1>
+		<Tooltip
+			title="In this mode, you will be guessing beers based on their name, brewery, type, and ABV. The colors indicate how close your guess is: green means correct, orange means partially correct (same country for brewery or similar type), and red means incorrect. Start by guessing any beer you like and see how close you are!"
+		>
+			<span class="icon-[icon-park-solid--help]" style="width: 2em; height: 2em; color: #973c00;"
+			></span>
+		</Tooltip>
 	</div>
 	<p class="text-xl font-semibold">Guess the beer!</p>
 	<p class="text-lg font-medium">Start by guessing your favorite beer and go from there :)</p>
@@ -99,8 +103,9 @@
 {/if}
 
 <GuessForm {makeGuess} {beers} />
-<Guesses {guesses} />
-
+<div class="grid gap-2 mt-4 w-2/5 mx-auto h-2/5 content-start">
+	<Guesses {guesses} />
+</div>
 <button class="bg-amber-800 rounded-md p-3 mt-4 hover:bg-amber-700" onclick={resetGame}
 	>Reset Game</button
 >

@@ -6,5 +6,5 @@
 <div class="flex flex-col gap-3 w-1/4">
 	<Infobox />
 	<Link name="Classic 🍺" url="/classic" />
-	<Link name="Emoji 🥴" url="/emoji" />
+	<Link name="Emoji 🥴" url="/emoji" class="invisible" />
 </div>

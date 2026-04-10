@@ -36,32 +36,31 @@
 </script>
 
 <!-- header row -->
-<div class="grid gap-2 mt-4 w-2/5 mx-auto">
-	<div class="grid grid-cols-4 text-center font-semibold gap-4 w-full">
-		{#each categories as category (category)}
-			<h3 class="text-lg font-bold">{category.charAt(0).toUpperCase() + category.slice(1)}</h3>
-		{/each}
-	</div>
-	<!-- guesses -->
-	<div class="guesses w-full grid gap-2">
-		{#each guesses as guess (guess.id)}
-			<div class="grid grid-cols-4 text-center gap-2 w-full">
-				{#each categories.slice(0, visibleCounts[guess.id] || 0) as category (category)}
-					<p
-						class={`truncate overflow-hidden whitespace-nowrap ${guess.correct[category]}`}
-						in:fade={{ duration: 600 }}
-						title={valueFor(guess.guess, category)}
-					>
-						{valueFor(guess.guess, category)}
-					</p>
-				{/each}
-			</div>
-		{/each}
-	</div>
+<div class="grid grid-cols-4 text-center font-semibold gap-4 w-full">
+	{#each categories as category (category)}
+		<h3 class="text-lg font-bold">{category.charAt(0).toUpperCase() + category.slice(1)}</h3>
+	{/each}
+</div>
+<!-- guesses -->
+<div class="guesses w-full grid gap-2">
+	{#each guesses as guess (guess.id)}
+		<div class="grid grid-cols-4 text-center gap-2 w-full">
+			{#each categories.slice(0, visibleCounts[guess.id] || 0) as category (category)}
+				<p
+					class={`truncate overflow-hidden whitespace-nowrap ${guess.correct[category]}`}
+					in:fade={{ duration: 600 }}
+					title={valueFor(guess.guess, category)}
+				>
+					{valueFor(guess.guess, category)}
+				</p>
+			{/each}
+		</div>
+	{/each}
 </div>
 
 <style>
 	p {
+		height: fit-content;
 		padding: 1rem;
 		margin: 0;
 		border-radius: 0.75rem;
@@ -78,8 +77,6 @@
 		background-color: #f19a0f;
 	}
 	.guesses {
-		height: auto;
-		max-height: 35vh;
 		overflow-y: auto;
 		scrollbar-width: thin;
 		scrollbar-color: var(--color-amber-500) transparent;
