@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import type { Beer, Brewery } from '../../types';
+import type { Beer, Brewery } from '../../../types';
 import { supabase } from '$lib/supabaseClient';
 
 export const load: PageServerLoad = async () => {

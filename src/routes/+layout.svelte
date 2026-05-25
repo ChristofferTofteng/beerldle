@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import backgroundImage from '$lib/assets/beerline.webp';
+	import Navbar from '$lib/components/navigation/Navbar.svelte';
 
 	let { children } = $props();
 </script>
@@ -9,6 +10,7 @@
 	class="h-screen bg-cover bg-center flex flex-col items-center justify-center"
 	style="background-image: url({backgroundImage})"
 >
+	<Navbar />
 	{@render children()}
 </div>
 

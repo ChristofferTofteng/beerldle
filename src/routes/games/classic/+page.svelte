@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { GuessForm, Guesses } from '../../lib/components/game';
-	import type { Beer, Guess } from '../../types';
+	import { GuessForm, Guesses } from '../../../lib/components/game';
+	import type { Beer, Guess } from '../../../types';
 	import { Confetti } from 'svelte-confetti';
 	import { goto } from '$app/navigation';
 	import { areTypesInSameGroup } from '$lib/utils/beerTypes';
