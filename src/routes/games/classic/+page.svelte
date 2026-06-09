@@ -5,7 +5,7 @@
 	import { goto } from '$app/navigation';
 	import { areTypesInSameGroup } from '$lib/utils/beerTypes';
 	import { resolve } from '$app/paths';
-	import Tooltip from '$lib/components/common/Tooltip.svelte';
+	import { Tooltip } from '$lib/components/common';
 
 	let guesses = $state<Guess[]>([]);
 	const { data } = $props();
@@ -59,7 +59,7 @@
 	}
 
 	const onclick = () => {
-		goto(resolve('/'));
+		goto(resolve('/games'));
 	};
 
 	function resetGame() {

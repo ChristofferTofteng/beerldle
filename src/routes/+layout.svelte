@@ -2,8 +2,31 @@
 	import '../app.css';
 	import backgroundImage from '$lib/assets/beerline.webp';
 	import Navbar from '$lib/components/navigation/Navbar.svelte';
+	import { LoadingBeer } from '$lib/components/common/';
+	import { beforeNavigate, afterNavigate, goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
+	import { shouldShowLoader } from '$lib/utils/loaderRoutes';
+	import type { LoaderRoute } from '$lib/utils/loaderRoutes';
 
 	let { children } = $props();
+	let loading = $state(false);
+	const LOADER_DURATION = 8000;
+
+	beforeNavigate((navigation) => {
+		if (loading || !navigation.to?.url) return;
+		if (!shouldShowLoader(navigation.to.url.pathname)) return;
+
+		navigation.cancel();
+		loading = true;
+
+		setTimeout(() => {
+			goto(resolve(navigation.to!.url!.pathname as LoaderRoute));
+		}, LOADER_DURATION);
+	});
+
+	afterNavigate(() => {
+		loading = false;
+	});
 </script>
 
 <div
@@ -11,7 +34,11 @@
 	style="background-image: url({backgroundImage})"
 >
 	<Navbar />
-	{@render children()}
+	{#if loading}
+		<LoadingBeer />
+	{:else}
+		{@render children()}
+	{/if}
 </div>
 
 <style>
