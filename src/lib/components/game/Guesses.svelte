@@ -79,6 +79,6 @@
 	.guesses {
 		overflow-y: auto;
 		scrollbar-width: thin;
-		scrollbar-color: var(--color-amber-500) transparent;
+		scrollbar-color: #f59e0b transparent;
 	}
 </style>

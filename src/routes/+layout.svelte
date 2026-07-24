@@ -1,12 +1,12 @@
 <script lang="ts">
 	import '../app.css';
-	import backgroundImage from '$lib/assets/beerline.webp';
 	import Navbar from '$lib/components/navigation/Navbar.svelte';
 	import { LoadingBeer } from '$lib/components/common/';
 	import { beforeNavigate, afterNavigate, goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import { shouldShowLoader } from '$lib/utils/loaderRoutes';
 	import type { LoaderRoute } from '$lib/utils/loaderRoutes';
+	import Footer from '$lib/components/footer/Footer.svelte';
 
 	let { children } = $props();
 	let loading = $state(false);
@@ -29,19 +29,27 @@
 	});
 </script>
 
-<div
-	class="h-screen bg-cover bg-center flex flex-col items-center justify-center"
-	style="background-image: url({backgroundImage})"
->
+<div class="min-h-screen w-full bg-bg flex flex-col">
 	<Navbar />
 	{#if loading}
 		<LoadingBeer />
 	{:else}
-		{@render children()}
+		<main class="flex-1">
+			{@render children()}
+		</main>
 	{/if}
+
+	<Footer />
 </div>
 
 <style>
+	:global(html, body) {
+		min-height: 100%;
+		margin: 0;
+		padding: 0;
+		background-color: #09090b;
+	}
+
 	:global(body) {
 		font-family: 'Courier New', Courier, monospace;
 		color: white;

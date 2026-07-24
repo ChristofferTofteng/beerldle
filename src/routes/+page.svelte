@@ -1,7 +1,15 @@
 <script lang="ts">
+	import Hero from '$lib/components/landing/Hero.svelte';
+	import ClubStatistics from '$lib/components/landing/ClubStatistics.svelte';
+	import FeaturedSections from '$lib/components/landing/FeaturedSections.svelte';
+	import BeerOfMonth from '$lib/components/landing/BeerOfMonth.svelte';
+	import LatestActivity from '$lib/components/landing/LatestActivity.svelte';
 </script>
 
-<div>
-	Welcome to my website! This is where you can see all the games I have created, as well as some
-	stats about me and my friends' beer drinking habits. Feel free to explore and have fun!
-</div>
+<main class="relative z-10 bg-bg text-text min-h-screen">
+	<Hero />
+	<ClubStatistics />
+	<FeaturedSections />
+	<BeerOfMonth />
+	<LatestActivity />
+</main>
