@@ -81,9 +81,9 @@
 		fallDistance="90vh"
 	/>
 {/if}
-<div class="p-4 bg-amber-500 rounded-lg shadow-md w-full max-w-2xl mx-auto mb-6 text-center">
+<div class="p-4 bg-primary rounded-lg shadow-md w-full max-w-2xl mx-auto mb-6 text-center">
 	<div class=" flex items-center justify-between mb-4">
-		<button {onclick} class=" bg-amber-800 text-white p-2 rounded hover:bg-amber-700">
+		<button {onclick} class=" bg-primary-dark text-white p-2 rounded hover:bg-primary-hover">
 			Go back
 		</button>
 		<h1>Classic</h1>
@@ -106,6 +106,6 @@
 <div class="grid gap-2 mt-4 w-2/5 mx-auto h-2/5 content-start">
 	<Guesses {guesses} />
 </div>
-<button class="bg-amber-800 rounded-md p-3 mt-4 hover:bg-amber-700" onclick={resetGame}
+<button class="bg-primary rounded-md p-3 mt-4 hover:bg-primary-hover" onclick={resetGame}
 	>Reset Game</button
 >

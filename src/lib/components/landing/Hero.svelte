@@ -1,5 +1,6 @@
 <script lang="ts">
 	import backgroundImage from '$lib/assets/beerline.webp';
+	import Link from '$lib/components/common/Link.svelte';
 </script>
 
 <section
@@ -10,11 +11,13 @@
 	<div class="absolute inset-0 bg-black/40 backdrop-blur-sm" aria-hidden="true"></div>
 
 	<div class="container mx-auto px-6 py-24 text-center relative z-10">
-		<h1 class="text-6xl font-extrabold">Welcome to Beerldle</h1>
-		<p class="mt-4 text-xl text-text-secondary">A small subtitle about the project</p>
+		<h1 class="text-6xl font-extrabold">Welcome to Untappd United</h1>
+		<p class="mt-4 text-xl text-text-secondary">
+			This is the website for the Untappd United Beer Club
+		</p>
 		<div class="mt-8 flex gap-4 justify-center">
-			<button class="bg-primary hover:bg-primary-hover text-black px-6 py-3 rounded">Play</button>
-			<button class="bg-surface border border-card text-text px-6 py-3 rounded">Learn More</button>
+			<Link name="Play" url="/games" />
+			<Link name="Learn More" url="/about" />
 		</div>
 	</div>
 </section>

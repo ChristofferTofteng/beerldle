@@ -6,7 +6,8 @@ export default {
     extend: {
       colors: {
         primary: colors.amber[500],
-        'primary-hover': colors.amber[400],
+        'primary-hover-light': colors.amber[400],
+        'primary-hover': colors.amber[600],
         'primary-dark': colors.amber[700],
         bg: colors.zinc[950],
         surface: colors.zinc[900],

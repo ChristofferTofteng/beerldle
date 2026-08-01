@@ -9,6 +9,6 @@
 	}
 </script>
 
-<button {onclick} class="text-2xl font-bold hover:bg-amber-600 h-full px-15">
+<button {onclick} class="text-2xl font-bold hover:bg-primary-hover h-full px-15">
 	{name}
 </button>

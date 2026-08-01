@@ -30,7 +30,7 @@
 
 <form
 	onsubmit={formSubmitted}
-	class="bg-amber-500 p-4 flex w-2/5 gap-8 rounded-lg shadow-md items-center justify-self-center"
+	class="bg-primary p-4 flex w-2/5 gap-8 rounded-lg shadow-md items-center justify-self-center"
 >
 	<input
 		type="text"
@@ -46,5 +46,5 @@
 			<option value={beer.name}>{beer.name}</option>
 		{/each}
 	</datalist>
-	<button class="bg-amber-800 text-white p-2 rounded hover:bg-amber-700">Guess</button>
+	<button class="bg-primary-dark text-white p-2 rounded hover:bg-primary-hover">Guess</button>
 </form>

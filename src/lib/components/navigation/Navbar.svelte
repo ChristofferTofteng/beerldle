@@ -4,7 +4,7 @@
 	import logo from '$lib/assets/logo.png';
 </script>
 
-<div class="w-full h-18 sticky top-0 left-0 flex items-center bg-amber-500 shadow-md px-10 z-50">
+<div class="w-full h-18 sticky top-0 left-0 flex items-center bg-primary shadow-md px-10 z-50">
 	<div class="w-1/5 h-full flex">
 		<a href={resolve('/')} class="flex h-full items-center text-3xl font-bold gap-4">
 			<img src={logo} alt="Beerldle Logo" class="w-15 h-full" />
