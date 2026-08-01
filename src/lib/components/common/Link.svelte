@@ -9,6 +9,8 @@
 	}
 </script>
 
-<button {onclick} class="hover:cursor-pointer rounded-md bg-amber-500 p-2 shadow-md" {...others}
-	>{name}</button
+<button
+	{onclick}
+	class="hover:cursor-pointer rounded-md bg-primary hover:bg-primary-hover px-6 py-3 shadow-md"
+	{...others}>{name}</button
 >

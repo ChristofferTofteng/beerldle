@@ -22,14 +22,14 @@
 		height = canvas.height = window.innerHeight;
 	}
 
-	function initBubbles(count: number = 120): void {
+	function initBubbles(count: number = 500): void {
 		bubbles = [];
 		for (let i = 0; i < count; i++) {
 			bubbles.push({
 				x: Math.random() * width,
 				y: height - Math.random() * fillLevel,
 				r: Math.random() * 6 + 2,
-				speed: Math.random() * 1 + 0.5
+				speed: Math.random() * 6 + 0.95
 			});
 		}
 	}
@@ -84,7 +84,7 @@
 		ctx.clearRect(0, 0, width, height);
 
 		if (fillLevel < height) {
-			fillLevel += 2.5; // Pour speed
+			fillLevel += 8.5; // Pour speed
 		}
 
 		drawBeer();
@@ -118,11 +118,9 @@
 <style>
 	.beer-canvas {
 		position: fixed;
-		top: 0;
+		bottom: 0;
 		left: 0;
 		width: 100vw;
-		height: 100vh;
-		z-index: -1;
-		background: #111;
+		height: 95vh;
 	}
 </style>

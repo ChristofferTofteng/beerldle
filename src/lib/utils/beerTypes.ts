@@ -9,13 +9,16 @@ const typeGroups = {
 		'sour',
 		'Pulp sour',
 		'gelato sour',
-		'sour ipa'
+		'sour ipa',
+		'smoothie sour',
+
 	],
 	ipa: [
 		'west coast ipa',
 		'double ipa',
 		'new england ipa',
 		'NEIPA',
+		'double NEIPA',
 		'session ipa',
 		'hazy ipa',
 		'DDHIPA',
@@ -44,7 +47,7 @@ const typeGroups = {
 		'Dry stout',
 		'stout'
 	],
-	lager: ['pilsner', 'blonde lager', 'dunkel', 'Rød Pilsner', 'New Zealand Pilsner', 'lager'],
+	lager: ['pilsner', 'blonde lager', 'dunkel', 'Rød Pilsner', 'New Zealand Pilsner', 'lager', 'helles', 'helles lager', 'Vienna Lager'],
 	nonAlcoholic: ['non-alcoholic', 'alcohol-free', 'near beer', 'alkoholfri', 'non alcoholic'],
 	brownAle: ['brown ale', 'english brown ale', 'american brown ale'],
 	other: [
@@ -59,9 +62,17 @@ const typeGroups = {
 		'Old Ale',
 		'pale ale',
 		'porter',
+		'imperial porter',
+		'imp. porter',
 		'lambic',
 		'kriek',
-		'framboise'
+		'framboise',
+		'belgian tripel',
+		'belgian dubbel',
+		'belgian quadrupel',
+		'belgian triple',
+		'belgian blonde',
+		'witbier',
 	]
 };
 
