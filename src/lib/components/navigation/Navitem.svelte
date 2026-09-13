@@ -1,14 +1,22 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { goto } from '$app/navigation';
 
-	let { name, url } = $props();
-
-	function onclick() {
-		goto(resolve(url));
-	}
+	let { name, url, children = undefined } = $props();
 </script>
 
-<button {onclick} class="text-2xl font-bold hover:bg-primary-hover h-full px-15">
-	{name}
-</button>
+<div class="group relative h-full">
+	<a
+		href={resolve(url)}
+		class="flex h-full items-center px-15 text-2xl font-bold hover:bg-primary-hover"
+	>
+		{name}
+	</a>
+
+	{#if children}
+		<div
+			class="absolute left-0 top-full hidden min-w-max bg-primary shadow-md group-hover:block group-focus-within:block"
+		>
+			{@render children()}
+		</div>
+	{/if}
+</div>

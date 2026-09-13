@@ -32,3 +32,12 @@ export type Brewery = {
 	name: string;
 	country: string;
 };
+
+export type Member = {
+	id: number;
+	name: string;
+	nickname: string;
+	board: boolean;
+	chairman: boolean;
+	founder: boolean;
+}

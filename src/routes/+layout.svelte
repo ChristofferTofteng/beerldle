@@ -10,7 +10,7 @@
 
 	let { children } = $props();
 	let loading = $state(false);
-	const LOADER_DURATION = 8000;
+	const LOADER_DURATION = 6000;
 
 	beforeNavigate((navigation) => {
 		if (loading || !navigation.to?.url) return;

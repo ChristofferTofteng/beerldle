@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Beer } from '../../../types';
+	import type { Beer } from '$lib/types';
 
 	let newGuess = $state('');
 

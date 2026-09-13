@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import Navitem from './Navitem.svelte';
+	import SubNavitem from './SubNavitem.svelte';
 	import logo from '$lib/assets/logo.png';
 </script>
 
@@ -14,6 +15,8 @@
 	<div class="flex items-center justify-around w-6/8 h-full">
 		<Navitem name="Games" url="/games" />
 		<Navitem name="Stats" url="/stats" />
-		<Navitem name="About" url="/about" />
+		<Navitem name="About" url="/about">
+			<SubNavitem name="Members" url="/about/members" />
+		</Navitem>
 	</div>
 </div>
